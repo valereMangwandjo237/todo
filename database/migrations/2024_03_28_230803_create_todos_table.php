@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("title")->nullable(false);
             $table->text("description")->nullable(false);
-            $table->boolean("id_do")->default(0);
+            $table->boolean("is_do")->default(0);
             $table->unsignedBigInteger('user_id'); // Colonne pour la clé étrangère
             $table->foreign('user_id')->references('id')->on('users'); // Déclaration de la clé étrangère
             $table->timestamps();

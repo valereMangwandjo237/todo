@@ -9,6 +9,13 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'is_do',
+        'user_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
