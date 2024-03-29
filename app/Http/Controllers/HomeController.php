@@ -32,4 +32,28 @@ class HomeController extends Controller
         }
         abort(502);
     }
+
+    public function undone()
+    {
+        $user = Auth::user();
+        
+        if($user){
+            $todos = $user->todos()->where('is_do', 0)->get();
+            return view('home', compact("todos"));
+        }
+        abort(502);
+    
+    }
+
+    public function done()
+    {
+        $user = Auth::user();
+        
+        if($user){
+            $todos = $user->todos()->where('is_do', 1)->get();
+            return view('home', compact("todos"));
+        }
+        abort(502);
+    
+    }
 }

@@ -25,6 +25,11 @@
           <h5 class="font-weight-bold">{{$todo->title}}</h5>
           <p>{{Str::limit($todo->description, 30)}}</p>
           <p>Crée le: {{$todo->created_at->diffForHumans()}}</p>
+          @if ($todo->is_do)
+            <p class="font-italic">Terminée: {{$todo->updated_at->diffForHumans()}}</p>
+          @else
+            <p>Non achevée</p>
+          @endif
         </div>
         @endforeach
       @else
