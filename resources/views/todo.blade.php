@@ -4,22 +4,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="container text-center">
-            <div class="row justify-content-center">
-            <div class="col-auto">
-                <a href="" class="btn btn-primary">+Creer une tache</a>
-            </div>
-            <div class="col-auto">
-                <a href="{{route('index')}}"  class="btn btn-secondary">Toutes les Taches</a>
-            </div>
-            <div class="col-auto">
-                <a href=""  class="btn btn-warning">En cours</a>
-            </div>
-            <div class="col-auto">
-                <a href="" class="btn btn-dark">Terminées</a>
-            </div>
-            </div>
-        </div>
+        @include('include.nav')
         <div class="card m-4" style="width: 80%;">
             <div class="card-body">
             <h4 class="card-title">
@@ -36,7 +21,7 @@
             </p>
             <div class="row">
                 <div class="col-auto">
-                    <a href="#" class="btn btn-success">Editer</a>
+                    <a href="{{ route('todos.edit', $todo) }}" class="btn btn-success">Editer</a>
                 </div>
                 <div class="col-auto">
                     <form action="{{ route('todos.destroy', $todo) }}" method="post" id="deleteForm">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 
@@ -30,15 +31,24 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view("create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TodoRequest $request)
     {
-        //
+        $request->validated();
+
+        Todo::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        session()->flash('status', '#Tache crée avec succèss!');
+
+        return redirect()->route('index');
     }
 
     /**
@@ -52,17 +62,28 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Todo $todo)
     {
-        //
+        return view("edit", compact("todo"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TodoRequest $request, Todo $todo)
     {
-        //
+        $request->validated();
+        
+        $todo->title = $request["title"];
+        $todo->description = $request["description"];
+
+        $todo->is_do = isset($request["is_do"]) ? 1 : 0;
+
+        $todo->save();
+
+        session()->flash('status', '#Tache modifiée avec succèss!');
+
+        return redirect()->route('index');
     }
 
     /**
