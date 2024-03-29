@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -44,6 +46,7 @@ class TodoController extends Controller
         Todo::create([
             'title' => $request->title,
             'description' => $request->description,
+            'user_id' => Auth::user()->id
         ]);
 
         session()->flash('status', '#Tache crée avec succèss!');
@@ -78,6 +81,10 @@ class TodoController extends Controller
         $todo->description = $request["description"];
 
         $todo->is_do = isset($request["is_do"]) ? 1 : 0;
+
+        if($todo->is_do == 1){
+            $todo->updated_at = Carbon::now();
+        }
 
         $todo->save();
 
