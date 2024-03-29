@@ -2,11 +2,6 @@
 
 @section('content')
 <div class="container">
-    <style>
-        .danger{
-            color: red;
-        }
-    </style>
 
     @include('include.nav')
     <form action="{{route('todos.store')}}" method="POST">

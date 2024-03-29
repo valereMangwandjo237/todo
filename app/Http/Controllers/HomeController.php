@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        
     }
 
     /**
@@ -30,7 +30,8 @@ class HomeController extends Controller
             $todos = $user->todos()->get();
             return view('home', compact("todos"));
         }
-        abort(502);
+        
+        return view("welcome");
     }
 
     public function undone()

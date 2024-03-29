@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', [HomeController::class, "index"])->name("index");
-Route::get('/todos/do', [HomeController::class, "done"])->name("todos.done");
-Route::get('/todos/undo', [HomeController::class, "undone"])->name("todos.undone");
+Route::get('/todos/do', [HomeController::class, "done"])->name("todos.done")->middleware('auth');
+Route::get('/todos/undo', [HomeController::class, "undone"])->name("todos.undone")->middleware('auth');
 
 
 Route::resource("todos", TodoController::class);
